@@ -89,7 +89,7 @@ resource "aws_instance" "kube-master" {
   key_name             = "clarusway"
   subnet_id            = "subnet-0d6970c8dbdee2121"
   vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
-  availability_zone    = "us-east-1a"
+  availability_zone    = "us-east-1d"
   tags = {
     Name        = "kube-master"
     Project     = "tera-kube-ans"
@@ -105,7 +105,7 @@ resource "aws_instance" "worker-1" {
   key_name             = "clarusway"
   subnet_id            = "subnet-0d6970c8dbdee2121"
   vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
-  availability_zone    = "us-east-1a"
+  availability_zone    = "us-east-1d"
   tags = {
     Name        = "worker-1"
     Project     = "tera-kube-ans"
@@ -121,7 +121,7 @@ resource "aws_instance" "worker-2" {
   key_name             = "clarusway"
   subnet_id            = "subnet-0d6970c8dbdee2121"
   vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
-  availability_zone    = "us-east-1a"
+  availability_zone    = "us-east-1d"
   tags = {
     Name        = "worker-2"
     Project     = "tera-kube-ans"
