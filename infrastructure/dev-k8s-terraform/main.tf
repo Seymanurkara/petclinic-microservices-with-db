@@ -1,5 +1,5 @@
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"
 }
 
 variable "sec-gr-k8s" {
@@ -32,9 +32,9 @@ resource "aws_security_group" "k8s-sec-gr" {
   }
 
   ingress {
-    protocol = "tcp"
-    from_port = 6443
-    to_port = 6443
+    protocol    = "tcp"
+    from_port   = 6443
+    to_port     = 6443
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -70,7 +70,6 @@ resource "aws_iam_role" "petclinic-master-server-s3-role" {
   ]
 }
 EOF
-
 }
 
 resource "aws_iam_role_policy_attachment" "petclinic_s3_policy" {
@@ -84,79 +83,67 @@ resource "aws_iam_instance_profile" "petclinic-master-server-profile" {
 }
 
 resource "aws_instance" "kube-master" {
-    ami = "ami-005fc0f236362e99f"
-    instance_type = "t3a.medium"
-    iam_instance_profile = aws_iam_instance_profile.petclinic-master-server-profile.name
-    key_name = "Seymanurkey"
-    subnet_id = "subnet-0d6970c8dbdee2121"
-    vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
-<<<<<<< HEAD
-    availability_zone = "us-east-1d"
-=======
-    availability_zone = "us-east-1a"
->>>>>>> feature/msp-16
-    tags = {
-      Name = "kube-master"
-      Project = "tera-kube-ans"
-      Role = "master"
-      Id = "1"
-      environment = "dev"
-    }
+  ami                  = "ami-005fc0f236362e99f"
+  instance_type        = "t3a.medium"
+  iam_instance_profile = aws_iam_instance_profile.petclinic-master-server-profile.name
+  key_name             = "Seymanurkey"
+  subnet_id            = "subnet-0d6970c8dbdee2121"
+  vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
+  availability_zone    = "us-east-1a"
+  tags = {
+    Name        = "kube-master"
+    Project     = "tera-kube-ans"
+    Role        = "master"
+    Id          = "1"
+    environment = "dev"
+  }
 }
 
 resource "aws_instance" "worker-1" {
-    ami = "ami-005fc0f236362e99f"
-    instance_type = "t3a.medium"
-    key_name = "Seymanurkey"
-    subnet_id = "subnet-0d6970c8dbdee2121"
-    vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
-<<<<<<< HEAD
-    availability_zone = "us-east-1d"
-=======
-    availability_zone = "us-east-1a"
->>>>>>> feature/msp-16
-    tags = {
-      Name = "worker-1"
-      Project = "tera-kube-ans"
-      Role = "worker"
-      Id = "1"
-      environment = "dev"
-    }
+  ami                  = "ami-005fc0f236362e99f"
+  instance_type        = "t3a.medium"
+  key_name             = "Seymanurkey"
+  subnet_id            = "subnet-0d6970c8dbdee2121"
+  vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
+  availability_zone    = "us-east-1a"
+  tags = {
+    Name        = "worker-1"
+    Project     = "tera-kube-ans"
+    Role        = "worker"
+    Id          = "1"
+    environment = "dev"
+  }
 }
 
 resource "aws_instance" "worker-2" {
-    ami = "ami-005fc0f236362e99f"
-    instance_type = "t3a.medium"
-    key_name = "Seymanurkey"
-    subnet_id = "subnet-0d6970c8dbdee2121"
-    vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
-<<<<<<< HEAD
-    availability_zone = "us-east-1d"
-=======
-    availability_zone = "us-east-1a"
->>>>>>> feature/msp-16
-    tags = {
-      Name = "worker-2"
-      Project = "tera-kube-ans"
-      Role = "worker"
-      Id = "2"
-      environment = "dev"
-    }
+  ami                  = "ami-005fc0f236362e99f"
+  instance_type        = "t3a.medium"
+  key_name             = "Seymanurkey"
+  subnet_id            = "subnet-0d6970c8dbdee2121"
+  vpc_security_group_ids = [aws_security_group.k8s-sec-gr.id]
+  availability_zone    = "us-east-1a"
+  tags = {
+    Name        = "worker-2"
+    Project     = "tera-kube-ans"
+    Role        = "worker"
+    Id          = "2"
+    environment = "dev"
+  }
 }
 
-output kube-master-ip {
+output "kube-master-ip" {
   value       = aws_instance.kube-master.public_ip
   sensitive   = false
   description = "public ip of the kube-master"
 }
 
-output worker-1-ip {
+output "worker-1-ip" {
   value       = aws_instance.worker-1.public_ip
   sensitive   = false
   description = "public ip of the worker-1"
 }
 
-output worker-2-ip {
+output "worker-2-ip" {
   value       = aws_instance.worker-2.public_ip
   sensitive   = false
   description = "public ip of the worker-2"
